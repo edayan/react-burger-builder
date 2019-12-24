@@ -29,11 +29,13 @@ class BurgerBuilder extends Component {
   };
 
   updatePurchaseState(updatedIngredients) {
-    const sum = Object.keys(updatedIngredients).map(igKey => {
-      return updatedIngredients[igKey]
-    }).reduce((sum, el) => {
-      return sum + el
-    }, 0);
+    const sum = Object.keys(updatedIngredients)
+      .map(igKey => {
+        return updatedIngredients[igKey];
+      })
+      .reduce((sum, el) => {
+        return sum + el;
+      }, 0);
     this.setState({ purchaseable: sum > 0 });
   }
 
@@ -75,15 +77,15 @@ class BurgerBuilder extends Component {
   };
 
   purchaseHandler = () => {
-    this.setState({ purchasing: true })
-  }
+    this.setState({ purchasing: true });
+  };
 
   purchaseCancelHandler = () => {
-    this.setState({ purchasing: false })
-  }
+    this.setState({ purchasing: false });
+  };
 
   purchaseContinueHandler = () => {
-    this.setState({loading: true});
+    this.setState({ loading: true });
     const order = {
       ingredients: this.state.ingredients,
       price: this.state.totalPrice,
@@ -97,14 +99,16 @@ class BurgerBuilder extends Component {
         email: 'test@test.com'
       },
       deliveryMethod: 'fastest'
-    }
-    axios.post('/orders.json', order)
-        .then(response => {
-          this.setState({loading: false, purchasing: false});
-        }).catch(error => {
-      this.setState({loading: false, purchasing: false});
-    })
-  }
+    };
+    axios
+      .post('/orders.json', order)
+      .then(response => {
+        this.setState({ loading: false, purchasing: false });
+      })
+      .catch(error => {
+        this.setState({ loading: false, purchasing: false });
+      });
+  };
 
   render() {
     const disabledInfo = {
@@ -113,16 +117,23 @@ class BurgerBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
-    let orderSummary =  <OrderSummary ingredients={this.state.ingredients}
-                                      purchaseCancelled={this.purchaseCancelHandler}
-                                      purchaseContinued={this.purchaseContinueHandler}
-                                      price={this.state.totalPrice.toFixed(2)} />;
+    let orderSummary = (
+      <OrderSummary
+        ingredients={this.state.ingredients}
+        purchaseCancelled={this.purchaseCancelHandler}
+        purchaseContinued={this.purchaseContinueHandler}
+        price={this.state.totalPrice.toFixed(2)}
+      />
+    );
     if (this.state.loading) {
-      orderSummary = <Spinner />
+      orderSummary = <Spinner />;
     }
     return (
       <Aux>
-        <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+        <Modal
+          show={this.state.purchasing}
+          modalClosed={this.purchaseCancelHandler}
+        >
           {orderSummary}
         </Modal>
         <Burger ingredients={this.state.ingredients} />
