@@ -9,7 +9,6 @@ class OrderSummary extends Component {
   }
 
   render() {
-    console.log('Order summary render');
     const ingredientSummary = Object.keys(this.props.ingredients).map(igKey => {
       return (
         <li key={igKey}>
