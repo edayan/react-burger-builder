@@ -37,6 +37,7 @@ const burgerBuilder = (state = initialState, action) => {
     case actionTypes.SET_INGREDIENTS:
       return {
         ...state,
+        totalPrice: 4,
         ingredients: action.ingredients,
         error: false
       };
