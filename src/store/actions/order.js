@@ -1,8 +1,10 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
-import { removeIngredient } from './burgerBuilder';
-import { FETCH_ORDERS_FAIL } from './actionTypes';
-import { FETCH_ORDERS_START } from './actionTypes';
+import {
+  FETCH_ORDERS_SUCCESS,
+  FETCH_ORDERS_START,
+  FETCH_ORDERS_FAIL
+} from './actionTypes';
 
 export const purchaseBurgerSuccess = (id, orderData) => {
   return {
@@ -47,14 +49,14 @@ export const purchaseInit = () => {
 
 export const fetchOrdersSuccess = orders => {
   return {
-    type: actionTypes.FETCH_ORDERS_SUCCESS,
+    type: FETCH_ORDERS_SUCCESS,
     orders: orders
   };
 };
 
 export const fetchOrdersFail = error => {
   return {
-    type: actionTypes.FETCH_ORDERS_FAIL,
+    type: FETCH_ORDERS_FAIL,
     error: error
   };
 };
