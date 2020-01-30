@@ -49,7 +49,7 @@ export const auth = (email, password) => {
         };
         dispatch(authSuccess(data));
         // console.log(err);
-        // dispatch(authFail(err));
+        // dispatch(authFail(err.response.data.err));
       });
   };
 };
