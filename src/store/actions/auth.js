@@ -21,6 +21,18 @@ export const authFail = error => {
   };
 };
 
+export const logout = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  };
+};
+export const checkAuthTimeOut = expirationTime => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, +expirationTime * 1000);
+  };
+};
 export const auth = (email, password) => {
   return dispatch => {
     dispatch(authStart());
@@ -48,6 +60,7 @@ export const auth = (email, password) => {
           idToken: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`
         };
         dispatch(authSuccess(data));
+        dispatch(checkAuthTimeOut(data.expiresIn));
         // console.log(err);
         // dispatch(authFail(err.response.data.err));
       });
