@@ -33,7 +33,7 @@ export const checkAuthTimeOut = expirationTime => {
     }, +expirationTime * 1000);
   };
 };
-export const auth = (email, password) => {
+export const auth = (email, password, isSignUp) => {
   return dispatch => {
     dispatch(authStart());
     const authData = {
@@ -45,6 +45,10 @@ export const auth = (email, password) => {
 
     let url =
       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyC9I_sV0m_Cg2yZxcAKrC5I17QrUmCPZZc';
+    if (!isSignUp) {
+      url =
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyC9I_sV0m_Cg2yZxcAKrC5I17QrUmCPZZc';
+    }
     // let url='https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyC9I_sV0m_Cg2yZxcAKrC5I17QrUmCPZZc'
     axios
       .post(url, authData)
