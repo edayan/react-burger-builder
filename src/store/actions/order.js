@@ -71,7 +71,8 @@ export const fetchOrders = token => {
 	return dispatch => {
 		dispatch(fetchOrdersStart());
 		axios
-			.get('/orders.json?auth=' + token)
+			// .get('/orders.json?auth=' + token)// disabled as auth is not implemented in firebase.
+			.get('/orders.json')
 			.then(result => {
 				const fetchedOrders = [];
 				for (let key in result.data) {
