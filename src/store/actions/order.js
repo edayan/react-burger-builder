@@ -67,11 +67,11 @@ export const fetchOrdersStart = () => {
 	};
 };
 
-export const fetchOrders = token => {
+export const fetchOrders = (token, userId) => {
 	return dispatch => {
 		dispatch(fetchOrdersStart());
 		axios
-			// .get('/orders.json?auth=' + token)// disabled as auth is not implemented in firebase.
+			// .get('/orders.json?auth=' + token + '&orderBy="userId"&equalTo="' + userId+ '")// disabled as auth is not implemented in firebase.
 			.get('/orders.json')
 			.then(result => {
 				const fetchedOrders = [];
